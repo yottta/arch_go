@@ -16,7 +16,7 @@ workflows:
    check_and_build:
      triggers:
        - schedule:
-           cron: "18 * * * *"
+           cron: "0 0 * * 0"
            filters:
             branches:
               only:
