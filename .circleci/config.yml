@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: /build_arch_go
     docker:
-      - image: docker:18.09
+      - image: alpine/git
     steps:
       - checkout
       - setup_docker_engine
