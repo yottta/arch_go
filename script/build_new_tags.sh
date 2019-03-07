@@ -24,12 +24,17 @@ for tag in $(git ls-remote --tags https://go.googlesource.com/go | awk '{print $
   set +e
   echo "#start#"${existing_tags}"#end#" | grep "\s$tag\s"> /dev/null
   result=$?
-  set -e
   if [ $result -eq  0 ]; then
     print_message "$tag already exists. Skipping."
     continue
   fi
   docker build $script_path/../docker --build-arg go_version=$tag -t arch-go
+  result=$?
+  set -e
+  if [ $result -ne  0 ]; then
+    print_message "$tag failed building the image. Skipped."
+    continue
+  fi
 
 	docker tag arch-go $DOCKER_HUB_USER_ID/arch-go:$tag
 	docker tag arch-go $DOCKER_HUB_USER_ID/arch-go:latest
