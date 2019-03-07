@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    working_directory: /build_arch_go
+    docker:
+      - image: docker:18.09
+    steps:
+      - checkout
+      - setup_docker_engine
+      - run:
+          name: Build arch_go images
+          command: script/build_new_tags.sh
+
+workflows:
+  version: 2
+  test-and-build-docker:
+    jobs:
+      - build
