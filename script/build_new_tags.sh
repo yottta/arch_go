@@ -10,8 +10,9 @@ for tag in $(git ls-remote --tags https://go.googlesource.com/go | awk '{print $
 
   set +e
   echo "#start#"${existing_tags}"#end#" | grep "\s$tag\s"> /dev/null
+  result=$?
   set -e
-  if [ $? -eq  0 ]; then
+  if [ $result -eq  0 ]; then
     echo "$tag already exists. Skipping."
     continue
   fi
