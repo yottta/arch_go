@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 script_path=$(cd `dirname $0` && pwd)
 echo $CIRCLECI_ENV_IN_SCRIPT
 for tag in $(git ls-remote --tags https://go.googlesource.com/go | awk '{print $2}' | grep refs/tags/go | cut -d'/' -f3); do
