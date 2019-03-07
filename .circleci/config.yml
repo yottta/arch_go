@@ -9,7 +9,7 @@ jobs:
       - setup_docker_engine
       - run:
           name: Build arch_go images
-          command: script/build_new_tags.sh
+          command: pwd && ./script/build_new_tags.sh
 
 workflows:
   version: 2
