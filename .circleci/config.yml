@@ -12,7 +12,10 @@ jobs:
           command: pwd && sh script/build_new_tags.sh
 
 workflows:
-  version: 2
-  test-and-build-docker:
-    jobs:
-      - build
+   version: 2
+   check_and_build:
+     triggers:
+       - schedule:
+           cron: "0 0 * * 0"
+     jobs:
+       - build
