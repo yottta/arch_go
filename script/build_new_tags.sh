@@ -8,7 +8,9 @@ existing_tags=" $(wget -q https://registry.hub.docker.com/v1/repositories/$DOCKE
 for tag in $(git ls-remote --tags https://go.googlesource.com/go | awk '{print $2}' | grep refs/tags/go | egrep -v "go1\.[0-1]{1}\..*$" | egrep -v "go1\.1$" | egrep -v "go1$" | cut -d'/' -f3); do
   echo "Build image $tag"
 
+  set +e
   echo "#start#"${existing_tags}"#end#" | grep "\s$tag\s"> /dev/null
+  set -e
   if [ $? -eq  0 ]; then
     echo "$tag already exists. Skipping."
     continue
