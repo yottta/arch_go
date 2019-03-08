@@ -34,4 +34,4 @@ or using a command similar with this one
 
     docker run --rm -it yottta/arch-go:<tag> bash
     
-where `<tag>` should be replaced with the [tag of the image](https://cloud.docker.com/repository/docker/yottta/arch-go/tags) that you want to use.
+where `<tag>` should be replaced with the [tag of the image](https://hub.docker.com/r/yottta/arch-go/tags) that you want to use.
