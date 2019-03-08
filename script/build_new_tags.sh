@@ -19,6 +19,7 @@ docker login -u "$DOCKER_HUB_USER_ID" -p "$DOCKER_HUB_USER_PWD"
 
 failed_tags=""
 skipped_tags=""
+built_tags=""
 
 for tag in $(git ls-remote --tags https://go.googlesource.com/go | awk '{print $2}' | grep refs/tags/go | egrep -v "go1\.[0-1]{1}\..*$" | egrep -v "go1\.1$" | egrep -v "go1$" | cut -d'/' -f3); do
   print_message "Build image $tag"
@@ -44,8 +45,10 @@ for tag in $(git ls-remote --tags https://go.googlesource.com/go | awk '{print $
 	docker tag arch-go $DOCKER_HUB_USER_ID/arch-go:latest
 	docker push $DOCKER_HUB_USER_ID/arch-go:$tag
 
+  built_tags="$built_tags $tag"
 	print_message "$tag image processed successfully"
 done
 
 print_message "Skipped tags: $skipped_tags"
 print_message "Failed tags: $failed_tags"
+print_message "Successfully built tags: $built_tags"
