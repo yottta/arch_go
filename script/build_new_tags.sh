@@ -27,11 +27,11 @@ for tag in $(git ls-remote --tags https://go.googlesource.com/go | awk '{print $
     set +e
     echo "#start#"${existing_tags}"#end#" | grep "\s$tag\s"> /dev/null
     result=$?
-    if [ $result -eq  0 ]; then
-        print_message "$tag already exists. Skipping."
-        skipped_tags="$skipped_tags $tag"
-        continue
-    fi
+#    if [ $result -eq  0 ]; then
+#        print_message "$tag already exists. Skipping."
+#        skipped_tags="$skipped_tags $tag"
+#        continue
+#    fi
     docker build $script_path/../docker --build-arg go_version=$tag -t arch-go
     result=$?
     set -e
