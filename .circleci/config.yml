@@ -4,6 +4,9 @@ jobs:
     working_directory: /build_arch_go
     docker:
       - image: docker:18.06.3-ce-git
+        auth:
+          username: $DOCKER_HUB_USER_ID
+          password: $DOCKER_HUB_USER_PWD
     steps:
       - checkout
       - setup_docker_engine
