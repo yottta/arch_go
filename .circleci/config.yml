@@ -12,7 +12,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: Build arch_go images
-          command: apk add git && ls -lah && pwd && sh build_new_tags.sh
+          command: apk add git jq && ls -lah && pwd && sh build_new_tags.sh
 
 workflows:
   version: 2
