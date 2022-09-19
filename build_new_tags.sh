@@ -13,7 +13,7 @@ function print_message() {
 
 script_path=$(cd `dirname $0` && pwd)
 
-existing_tags="$(wget -q https://hub.docker.com/v2/namespaces/$DOCKER_HUB_USER_ID/repositories/arch-go/tags -O - | jq '.results[].name')"
+existing_tags="$(wget -q https://hub.docker.com/v2/namespaces/$DOCKER_HUB_USER_ID/repositories/arch-go/tags?page_size=1000 -O - | jq '.results[].name')"
 echo "$existing_tags"
 docker login -u "$DOCKER_HUB_USER_ID" -p "$DOCKER_HUB_USER_PWD"
 
