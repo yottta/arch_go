@@ -32,7 +32,7 @@ for tag in $(git ls-remote --tags https://go.googlesource.com/go | awk '{print $
         skipped_tags="$skipped_tags $tag"
         continue
     fi
-    docker build $script_path/../docker --build-arg go_version=$tag -t arch-go
+    docker build --platform linux/amd64 $script_path/../docker --build-arg GO_VERSION=$tag -t arch-go
     result=$?
     set -e
     if [ $result -ne  0 ]; then
