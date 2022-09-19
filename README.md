@@ -2,7 +2,7 @@
 
 Creates docker images containing [Arch Linux](https://www.archlinux.org/) and [Go (Golang)](https://golang.org/) installation.
 
-# How it works
+# How does it work
 
 This repo contains 3 files:
 * A Dockerfile that is used to create the actual image;
@@ -16,9 +16,13 @@ This is receiving one argument called `go_version` which is should contains the 
 The only thing that is done here is to download the binary and extract it to `/usr/local` and update the `PATH` of the image in order to make the go binaries available right away.
 
 ## Bash script
-This can be found in [here](script/build_new_tags.sh).
-This is responsible with fetching the already built images from [DockerHub](https://hub.docker.com/r/yottta/arch-go).
-Also this is listing most of the releases from the [Golang git repo](https://go.googlesource.com/go) and for every one of those that has no image built in arch-go, is building it and push it to the DockerHub.
+* This can be found in [here](script/build_new_tags.sh).
+* This is responsible with fetching the already built images from [DockerHub](https://hub.docker.com/r/yottta/arch-go).
+* Lists most of the releases from the [Golang git repo](https://go.googlesource.com/go) and for every one of those that has no image built in arch-go, is building it and push it to the DockerHub.
+* Needed environment variables:
+  * DOCKER_HUB_USER_ID - the user of the docker hub where the images will be pushed to;
+  * DOCKER_HUB_USER_PWD - docker hub access token to have access to push the images;
+
 
 ## CircleCI config
 This can be found in [here](.circleci/config.yml)
