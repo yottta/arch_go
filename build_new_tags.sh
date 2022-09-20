@@ -20,7 +20,7 @@ docker login -u "$DOCKER_HUB_USER_ID" -p "$DOCKER_HUB_USER_PWD"
 skipped_tags=""
 built_tags=""
 
-for tag in $(git ls-remote --tags https://go.googlesource.com/go | awk '{print $2}' | grep refs/tags/go | egrep -v "go1\.[0-1]{1}\..*$" | egrep -v "go1\.1$" | egrep -v "go1$" | cut -d'/' -f3); do
+for tag in $(git ls-remote --tags https://go.googlesource.com/go | awk '{print $2}' | grep refs/tags/go | egrep -v "go1\.[0-1]{1}(\.|rc).*$" | egrep -v "go1\.1$" | egrep -v "go1$" | cut -d'/' -f3); do
     print_message "Build image $tag"
 
     res=`echo "${existing_tags}" | grep '"'$tag'"' || true`
