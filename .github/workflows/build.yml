@@ -3,11 +3,9 @@ name: build-images
 on:
   pull_request:
   push:
-#    branches:
-#      - master
-#      - main
-
   workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0'
 
 jobs:
   build:
