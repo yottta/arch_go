@@ -13,6 +13,8 @@ function print_message() {
 
 script_path=$(cd `dirname $0` && pwd)
 
+# Excluding these as the build of these is failing. The user should make the image for himself if really needs these ones.
+excluded_versions=" go1 go1.0.1 go1.0.2 go1.0.3 go1.1 go1.1.1 go1.1.2 go1.1rc2 go1.1rc3 go1.2 go1.2.1 go1.2rc2 go1.2rc3 go1.2rc4 go1.2rc5 go1.8.5rc5 "
 existing_tags=""
 docker_tags_url="https://hub.docker.com/v2/namespaces/${DOCKER_HUB_USER_ID}/repositories/arch-go/tags?page_size=1000"
 while true; do
@@ -38,6 +40,12 @@ for tag in $(git ls-remote --tags https://go.googlesource.com/go | awk '{print $
     res=`echo -e "${existing_tags}" | grep '"'$tag'"' || true`
     if [ -n "$res" ]; then
         print_message "$tag already exists. Skipping."
+        skipped_tags="$skipped_tags $tag"
+        continue
+    fi
+    res=`echo -e "${excluded_versions}" | grep ' '$tag' ' || true`
+    if [ -n "$res" ]; then
+        print_message "$tag is in the excluded list. Skipping."
         skipped_tags="$skipped_tags $tag"
         continue
     fi
